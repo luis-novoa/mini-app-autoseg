@@ -4,19 +4,19 @@ RSpec.describe User, type: :model do
   subject { build(:user) }
 
   context '.email' do
-    it 'checks for presence' do
+    it 'must be present' do
       subject.email = ''
       expect(subject.save).to eq(false)
     end
 
-    it 'checks for format' do
+    it 'must follow format' do
       subject.email = 'user'
       expect(subject.save).to eq(false)
     end
   end
 
   context '.password' do
-    it 'checks for presence' do
+    it 'must be present' do
       subject.password = ''
       subject.password_confirmation = ''
       expect(subject.save).to eq(false)
@@ -35,5 +35,10 @@ RSpec.describe User, type: :model do
       subject.password_confirmation = password
       expect(subject.save).to eq(false)
     end
+  end
+
+  it 'can have many lists' do
+    create_list(:list, 2, user: subject)
+    expect(subject.lists.count).to eq(2)
   end
 end
