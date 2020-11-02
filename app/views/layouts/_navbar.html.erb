@@ -1,0 +1,9 @@
+<nav>
+  <ul>
+    <li><%= link_to 'Create List', new_list_path %></li>
+    <li><%= link_to 'My Lists', lists_path(type: 'user') %></li>
+    <li><%= link_to 'Public Lists', lists_path(type: 'public') %></li>
+    <li><%= link_to 'Favorite Lists', favorites_path %></li>
+    <li><%= link_to 'Log out', destroy_user_session_path, method: :delete %></li>
+  </ul>
+</nav>

@@ -1,0 +1,28 @@
+* {
+  box-sizing: border-box;
+}
+
+body{
+  display: flex;
+  justify-content: center;
+}
+
+nav {
+  border: 1px black solid;
+
+  li {
+    list-style: none;
+  }
+
+  li:not(:last-of-type) {
+    border-bottom: 1px black solid;
+    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+
+  ul {
+    margin: 0;
+    padding: 0.5rem 1rem;
+  }
+
+}
