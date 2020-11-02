@@ -17,17 +17,13 @@
     <h3>Tasks</h3>
     <ul>
       <%= f.fields_for :tasks do |tasks_form| %>
-        <li>
+        <li class='task'>
           <%= tasks_form.label :description %>
           <%= tasks_form.text_field :description %>
+          <button class='delete-task'>Delete this Task</button>
         </li>
       <% end %>
-      <%= f.fields_for :sublists do |sublists_form| %>
-        <li>
-          <%= sublists_form.label :description %>
-          <%= sublists_form.text_field :description %>
-        </li>
-      <% end %>
+      <button class='add-task'>Add Another Task</button>
     </ul>
   </div>
 
@@ -35,3 +31,5 @@
     <%= f.submit 'Submit' %>
   </div>
 <% end %>
+
+<%= javascript_pack_tag 'new_list' %>
