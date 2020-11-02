@@ -55,8 +55,8 @@ RSpec.describe List, type: :model do
 
     context 'are destroyed if list is destroyed' do
       before(:each) { subject.destroy }
-      it('destroys tasks') { expect(Task.count).to eq(0) }
-      it('destroys sublists') { expect(List.count).to eq(0) }
+      it('- tasks') { expect(Task.count).to eq(0) }
+      it('- sublists') { expect(List.count).to eq(0) }
     end
   end
 

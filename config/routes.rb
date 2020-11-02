@@ -1,9 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users
 
-  resources :lists
+  resources :favorites, only: %i[index]
+  resources :lists, only: %i[index show new]
 
-  devise_scope :user do
-    root to: 'devise/sessions#new'
-  end
+  root to: 'lists#index'
 end
