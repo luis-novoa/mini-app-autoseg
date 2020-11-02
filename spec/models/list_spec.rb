@@ -35,6 +35,7 @@ RSpec.describe List, type: :model do
     subject { create(:list) }
     let!(:sublists) { create_list(:sublist, 2, parent_list: subject) }
     let!(:sublist_child) { create(:sublist, parent_list: sublists[0]) }
+    let!(:tasks) { create_list(:task, 2, list: subject) }
 
     it 'can have sublists' do
       expect(subject.sublists.count).to eq(2)
@@ -46,6 +47,10 @@ RSpec.describe List, type: :model do
 
     it "can't have an ancestor list as sublist" do
       expect(subject.update(parent_list_id: sublist_child.id)).to eq(false)
+    end
+
+    it 'can have tasks' do
+      expect(subject.tasks.count).to eq(2)
     end
   end
 end
