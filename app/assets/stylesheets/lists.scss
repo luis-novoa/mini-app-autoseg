@@ -1,3 +1,17 @@
 // Place all the styles related to the Lists controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+.new-list-form {
+  border: 1px black solid;
+  border-left: none;
+  padding: 0.5rem 1rem;
+
+  h2, h3 {
+    margin-top: 0;
+  }
+
+  .field:not(:last-of-type), li:not(:last-of-type) {
+    margin-bottom: 0.5rem;
+  }
+}

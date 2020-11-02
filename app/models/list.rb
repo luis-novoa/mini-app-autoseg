@@ -9,6 +9,9 @@ class List < ApplicationRecord
   belongs_to :parent_list, class_name: 'List', optional: true
   belongs_to :user
 
+  accepts_nested_attributes_for :sublists
+  accepts_nested_attributes_for :tasks
+
   private
 
   def check_ancestry

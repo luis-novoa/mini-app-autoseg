@@ -1,0 +1,37 @@
+<%= form_with model: @new_list, html: { class: 'new-list-form' } do |f| %>
+  <h2>Create a List</h2>
+  <div class='field'>
+    <%= f.label :description, 'Title' %>
+    <%= f.text_field :description %>
+  </div>
+
+  <div class='field'>
+    <%= f.label :is_private, 'Is this list private?' %>
+    <%= f.radio_button :is_private, 1, checked: true %>
+    <%= f.label :is_private, 'Yes', value: '1' %>
+    <%= f.radio_button :is_private, 0 %>
+    <%= f.label :is_private, 'No', value: '0' %> <br> <br>
+  </div>
+
+  <div class='tasks'>
+    <h3>Tasks</h3>
+    <ul>
+      <%= f.fields_for :tasks do |tasks_form| %>
+        <li>
+          <%= tasks_form.label :description %>
+          <%= tasks_form.text_field :description %>
+        </li>
+      <% end %>
+      <%= f.fields_for :sublists do |sublists_form| %>
+        <li>
+          <%= sublists_form.label :description %>
+          <%= sublists_form.text_field :description %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+
+  <div class='actions'>
+    <%= f.submit 'Submit' %>
+  </div>
+<% end %>
