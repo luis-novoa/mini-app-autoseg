@@ -4,13 +4,11 @@ class List < ApplicationRecord
 
   validates :description, presence: true, length: { minimum: 2, maximum: 100 }
 
-  has_many :tasks, dependent: :destroy
   has_many :sublists, class_name: 'List', foreign_key: 'parent_list_id', dependent: :destroy
   belongs_to :parent_list, class_name: 'List', optional: true
   belongs_to :user
 
   accepts_nested_attributes_for :sublists
-  accepts_nested_attributes_for :tasks
 
   private
 
@@ -22,6 +20,12 @@ class List < ApplicationRecord
 
     errors.add(:parent_list_id, 'This list is an ancestor of the list you are trying to set up as parent.')
     throw(:abort)
+  end
+
+  def destroy_empty(record)
+    return unless record
+
+    record.destroy if record.sublists.empty?
   end
 
   def record_parent_id

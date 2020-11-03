@@ -16,10 +16,10 @@
   <div class='tasks'>
     <h3>Tasks</h3>
     <ul>
-      <%= f.fields_for :tasks do |tasks_form| %>
+      <%= f.fields_for :sublists do |sublists_form| %>
         <li class='task'>
-          <%= tasks_form.label :description %>
-          <%= tasks_form.text_field :description %>
+          <%= sublists_form.label :description %>
+          <%= sublists_form.text_field :description %>
           <button class='add-subtask'>Add Subtask</button>
           <button class='delete-task'>Delete this Task</button>
         </li>

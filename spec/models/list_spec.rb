@@ -35,7 +35,6 @@ RSpec.describe List, type: :model do
     subject { create(:list) }
     let!(:sublists) { create_list(:sublist, 2, parent_list: subject) }
     let!(:sublist_child) { create(:sublist, parent_list: sublists[0]) }
-    let!(:tasks) { create_list(:task, 2, list: subject) }
 
     it 'can have sublists' do
       expect(subject.sublists.count).to eq(2)
@@ -49,24 +48,18 @@ RSpec.describe List, type: :model do
       expect(subject.update(parent_list_id: sublist_child.id)).to eq(false)
     end
 
-    it 'can have tasks' do
-      expect(subject.tasks.count).to eq(2)
-    end
-
-    context 'are destroyed if list is destroyed' do
-      before(:each) { subject.destroy }
-      it('- tasks') { expect(Task.count).to eq(0) }
-      it('- sublists') { expect(List.count).to eq(0) }
+    it 'are destroyed if list is destroyed' do
+      subject.destroy
+      expect(List.count).to eq(0)
     end
   end
 
   context 'automatic destroyed' do
     subject { create(:list) }
     let!(:sublist) { create(:sublist, parent_list: subject) }
-    let!(:task) { create(:task, list: sublist) }
 
-    it 'if all sublists and tasks are destroyed' do
-      task.destroy
+    it 'if all sublists are destroyed' do
+      sublist.destroy
       expect(List.exists?(subject.id)).to eq(false)
     end
   end
