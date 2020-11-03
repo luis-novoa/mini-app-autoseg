@@ -2,6 +2,10 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
+.add-task {
+  margin-top: 0.5rem;
+}
+
 .new-list-form {
   border: 1px black solid;
   border-left: none;
@@ -14,10 +18,6 @@
   .field:not(:last-of-type), li:not(:last-of-type) {
     margin-bottom: 0.5rem;
   }
-}
-
-.add-task {
-  margin-top: 0.5rem;
 }
 
 .task, .sublist {

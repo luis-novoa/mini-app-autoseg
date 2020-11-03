@@ -48,7 +48,7 @@ function createElements(type, object) {
 function addSubtask(e) {
   e.preventDefault();
   const newSublist = turnIntoSublist($(this).parent());
-  const input = newSublist.find('input');
+  const input = newSublist.children('input');
   newSublist.append(createSubtaskForm(input));
 }
 
@@ -61,7 +61,7 @@ function createSubtaskForm(siblingInput) {
     parentID: siblingInput.attr('id').replace('_description', ''),
     parentName: siblingInput.attr('name').replace('[description]', '')
   });
-  const { input, label, deleteButton, subtaskButton } = createElements('task', $(this).parent());
+  const { input, label, deleteButton, subtaskButton } = createElements('task', newUL);
   const newTask = $("<li class='task'></li>").append(label, input, subtaskButton, deleteButton);
   newUL.append(newTask);
   return newUL;
