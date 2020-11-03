@@ -10,18 +10,13 @@ $(document).ready(function () {
 
   $('.add-task').click(function (e) {
     e.preventDefault();
-    // const newTaskLabel = "<label for='list_tasks_attributes_0_description'>Description</label>";
-    // const newTaskInput = $('<input></input>').attr({
-    //   'type': 'text',
-    //   'name': 'list[tasks_attributes][0][description]',
-    //   'id': 'list_tasks_attributes_0_description'
-    // });
-    // const deleteButton = $("<button class='delete-task'>Delete this Task</button>").click(removeParentTask);
-    const { input, label, deleteButton } = createElements('task', $(this).parent());
-    const newTask = $("<li class='task'></li>").append(label, input, deleteButton);
+    const { input, label, deleteButton, subtaskButton } = createElements('task', $(this).parent());
+    const newTask = $("<li class='task'></li>").append(label, input, subtaskButton, deleteButton);
     $(this).before(newTask);
     updateCounter('task', 1, $(this).parent());
   });
+
+  $('.add-subtask').click(addSubtask);
 });
 
 function createElements(type, object) {
@@ -32,6 +27,7 @@ function createElements(type, object) {
   const id = `${ancestorsID}_${attr}_${counter}_description`;
   const name = `${ancestorsName}[${attr}][${counter}][description]`
   const deleteButton = $("<button class='delete-task'>Delete this Task</button>").click(removeParentTask);
+  const subtaskButton = $("<button class='add-subtask'>Add Subtask</button>").click(addSubtask);
   const label = `<label for='${id}'>Description</label>`;
   const input = $('<input></input>').attr({
     'type': 'text',
@@ -41,14 +37,36 @@ function createElements(type, object) {
   return {
     label: label,
     input: input,
-    deleteButton: deleteButton
+    deleteButton: deleteButton,
+    subtaskButton: subtaskButton
   };
+}
+
+function addSubtask(e) {
+  e.preventDefault();
+  turnIntoSublist($(this).parent());
 }
 
 function removeParentTask(e) {
   e.preventDefault();
   updateCounter('task', -1, $(this).parent().parent());
   $(this).parent().remove();
+}
+
+function turnIntoSublist(task) {
+  const ul = task.parent();
+  const previous = task.prev();
+  const { input, label, deleteButton, subtaskButton } = createElements('sublist', ul);
+  const newSublist = $("<li class='task'></li>").append(label, input, subtaskButton, deleteButton);
+  task.remove();
+  updateCounter('task', -1, ul);
+  updateCounter('sublist', 1, ul);
+  console.log()
+  if (previous.html() == undefined) {
+    ul.prepend(newSublist);
+  } else {
+    previous.after(newSublist);
+  }
 }
 
 function updateCounter(type, amount, object) {
