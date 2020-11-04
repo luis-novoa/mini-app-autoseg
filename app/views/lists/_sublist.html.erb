@@ -1,0 +1,6 @@
+<ol>
+  <% sublist.each do |item| %>
+      <li><%= item.description %></li>
+      <%= render_sublist(item.sublists) %>
+  <% end %>
+</ol>

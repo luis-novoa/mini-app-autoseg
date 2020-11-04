@@ -1,4 +1,5 @@
 class ListsController < ApplicationController
+  before_action :check_permition, only: %i[show]
   def new
     @list = current_user.lists.build
     @list.sublists.build
@@ -14,16 +15,17 @@ class ListsController < ApplicationController
     end
   end
 
-  def show; end
+  def show
+    @list
+  end
 
   def index; end
 
   private
 
-  def list_params
-    sublist_levels = count_sublist_levels(params[:list])
-    params_permitted = prepare_sublists_attributes(sublist_levels)
-    params.require(:list).permit(*params_permitted)
+  def check_permition
+    @list = List.find(params[:id])
+    return redirect_to lists_path if @list.parent_list_id || (@list.is_private && @list.user_id != current_user.id)
   end
 
   def count_sublist_levels(list_params)
@@ -34,6 +36,12 @@ class ListsController < ApplicationController
       output << count_sublist_levels(sublist_element[1]) + 1
     end
     output.max
+  end
+
+  def list_params
+    sublist_levels = count_sublist_levels(params[:list])
+    params_permitted = prepare_sublists_attributes(sublist_levels)
+    params.require(:list).permit(*params_permitted)
   end
 
   def prepare_sublists_attributes(sublist_levels)

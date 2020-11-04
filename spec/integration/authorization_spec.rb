@@ -36,7 +36,7 @@ RSpec.describe 'Authorization', type: :feature do
   end
 
   context 'logged user' do
-    let(:list) { create(:list) }
+    let(:list) { create(:list, is_private: true) }
     before(:each) do
       login(list.user)
     end
@@ -60,9 +60,30 @@ RSpec.describe 'Authorization', type: :feature do
       is_expected.to have_current_path(new_list_path)
     end
 
-    it 'can access list show page' do
-      visit list_path(list)
-      is_expected.to have_current_path(list_path(list))
+    context 'list show page' do
+      let(:private_list) { create(:list, is_private: true) }
+      let(:public_list) { create(:list) }
+      let(:sublist) { create(:sublist, parent_list: list) }
+
+      it 'can access own private list' do
+        visit list_path(list)
+        is_expected.to have_current_path(list_path(list))
+      end
+
+      it "can't access other peoples's private list" do
+        visit list_path(private_list)
+        is_expected.to have_current_path(lists_path)
+      end
+
+      it "can access other peoples's public list" do
+        visit list_path(public_list)
+        is_expected.to have_current_path(list_path(public_list))
+      end
+
+      it "can't access sublist" do
+        visit list_path(sublist)
+        is_expected.to have_current_path(lists_path)
+      end
     end
 
     it 'can access favorites index page' do

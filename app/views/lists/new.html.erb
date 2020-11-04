@@ -1,5 +1,8 @@
 <%= form_with model: @list, html: { class: 'new-list-form' } do |f| %>
   <h2>Create a List</h2>
+
+  <%= display_errors %>
+
   <div class='field'>
     <%= f.label :description, 'Title' %>
     <%= f.text_field :description %>
@@ -15,7 +18,7 @@
 
   <div class='tasks'>
     <h3>Tasks</h3>
-    <ul>
+    <ol>
       <%= f.fields_for :sublists do |sublists_form| %>
         <li class='task'>
           <%= sublists_form.label :description %>
@@ -25,7 +28,7 @@
         </li>
       <% end %>
       <button class='add-task'>Add Another Task</button>
-    </ul>
+    </ol>
   </div>
 
   <div class='actions'>

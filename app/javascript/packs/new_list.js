@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  $('.tasks').find('ul').data({
+  $('.tasks').find('ol').data({
     sublistCounter: 1,
     sublistUniqueID: 1,
     parentID: 'list',
@@ -51,14 +51,14 @@ function addSubtask(e) {
 }
 
 function createSubtaskForm(siblingInput) {
-  const newUL = $('<ul></ul>').data({
+  const newUL = $('<ol></ol>').data({
     sublistCounter: 0,
     sublistUniqueID: 0,
     parentID: siblingInput.attr('id').replace('_description', ''),
     parentName: siblingInput.attr('name').replace('[description]', '')
   });
   const { input, label, deleteButton, subtaskButton } = createElements(newUL);
-  const newTask = $(`<li class='task' id='${newUL.data('parentID')}'></li>`);
+  const newTask = $(`<li class='task' id='${newUL.data('parentID')}'></li>`)
   newTask.append(label, input, subtaskButton, deleteButton);
   const addTaskButton = $("<button class='add-task'>Add Another Subtask</button>").click(addTask);
   newUL.append(newTask, addTaskButton);

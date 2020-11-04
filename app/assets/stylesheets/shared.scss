@@ -7,12 +7,12 @@ body{
   justify-content: center;
 }
 
-li {
-  list-style: none;
-}
-
 nav {
   border: 1px black solid;
+
+  li {
+    list-style: none;
+  }
 
   li:not(:last-of-type) {
     border-bottom: 1px black solid;
@@ -23,6 +23,20 @@ nav {
   ul {
     margin: 0;
     padding: 0.5rem 1rem;
+  }
+}
+
+section {
+  border: 1px black solid;
+  border-left: none;
+  padding: 0.5rem 1rem;
+
+  h2, h3 {
+    margin-top: 0;
+  }
+
+  ol {
+    padding-left: 1rem;
   }
 }
 

@@ -5,6 +5,7 @@ FactoryBot.define do
     user
 
     trait :has_parent do
+      user { nil }
       parent_list { association :list }
     end
 
