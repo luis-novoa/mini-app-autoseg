@@ -19,7 +19,9 @@ class ListsController < ApplicationController
     @list
   end
 
-  def index; end
+  def index
+    @lists = current_user.lists.order(:description)
+  end
 
   private
 

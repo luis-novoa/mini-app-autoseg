@@ -29,6 +29,7 @@ nav {
 section {
   border: 1px black solid;
   border-left: none;
+  min-width: 40rem;
   padding: 0.5rem 1rem;
 
   h2, h3 {
@@ -40,6 +41,6 @@ section {
   }
 }
 
-.wrapper {
+.flex {
   display: flex;
 }
