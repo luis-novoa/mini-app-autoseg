@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 2020_11_02_013316) do
     t.boolean "is_private", default: false
     t.string "previous_lists_ids", default: ""
     t.integer "parent_list_id"
-    t.integer "user_id", null: false
+    t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["parent_list_id"], name: "index_lists_on_parent_list_id"

@@ -6,7 +6,7 @@ class List < ApplicationRecord
 
   has_many :sublists, class_name: 'List', foreign_key: 'parent_list_id', dependent: :destroy
   belongs_to :parent_list, class_name: 'List', optional: true
-  belongs_to :user
+  belongs_to :user, optional: true
 
   accepts_nested_attributes_for :sublists
 

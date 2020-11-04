@@ -58,7 +58,8 @@ function createSubtaskForm(siblingInput) {
     parentName: siblingInput.attr('name').replace('[description]', '')
   });
   const { input, label, deleteButton, subtaskButton } = createElements(newUL);
-  const newTask = $("<li class='task'></li>").append(label, input, subtaskButton, deleteButton);
+  const newTask = $(`<li class='task' id='${newUL.data('parentID')}'></li>`);
+  newTask.append(label, input, subtaskButton, deleteButton);
   const addTaskButton = $("<button class='add-task'>Add Another Subtask</button>").click(addTask);
   newUL.append(newTask, addTaskButton);
   return newUL;
