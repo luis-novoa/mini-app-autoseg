@@ -3,37 +3,5 @@
 
   <%= display_errors %>
 
-  <div class='field'>
-    <%= f.label :description, 'Title' %>
-    <%= f.text_field :description %>
-  </div>
-
-  <div class='field'>
-    <%= f.label :is_private, 'Is this list private?' %>
-    <%= f.radio_button :is_private, 1, checked: true %>
-    <%= f.label :is_private, 'Yes', value: '1' %>
-    <%= f.radio_button :is_private, 0 %>
-    <%= f.label :is_private, 'No', value: '0' %> <br> <br>
-  </div>
-
-  <div class='tasks'>
-    <h3>Tasks</h3>
-    <ol>
-      <%= f.fields_for :sublists do |sublists_form| %>
-        <li class='task'>
-          <%= sublists_form.label :description %>
-          <%= sublists_form.text_field :description %>
-          <button class='add-subtask'>Add Subtask</button>
-          <button class='delete-task'>Delete this Task</button>
-        </li>
-      <% end %>
-      <button class='add-task'>Add Another Task</button>
-    </ol>
-  </div>
-
-  <div class='actions'>
-    <%= f.submit 'Submit' %>
-  </div>
+  <%= render partial: 'list_form', locals: { f: f } %>
 <% end %>
-
-<%= javascript_pack_tag 'new_list' %>

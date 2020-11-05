@@ -88,7 +88,6 @@ RSpec.describe 'Authorization', type: :feature do
 
     context 'list edit page' do
       let(:other_user_list) { create(:list) }
-      let(:other_user_sublist) { create(:sublist, parent_list: other_user_list) }
       let(:sublist) { create(:sublist, parent_list: list) }
 
       it 'can access own list' do
@@ -101,13 +100,8 @@ RSpec.describe 'Authorization', type: :feature do
         is_expected.to have_current_path(lists_path)
       end
 
-      it 'can access own sublist' do
+      it "can't access sublist" do
         visit edit_list_path(sublist)
-        is_expected.to have_current_path(edit_list_path(sublist))
-      end
-
-      it "can't access other people's sublist" do
-        visit edit_list_path(other_user_sublist)
         is_expected.to have_current_path(lists_path)
       end
     end

@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 2020_11_02_013316) do
   create_table "lists", force: :cascade do |t|
     t.string "description", null: false
     t.boolean "is_private", default: false
+    t.integer "sublist_max_level"
     t.string "previous_lists_ids", default: ""
     t.integer "parent_list_id"
     t.integer "user_id"

@@ -4,7 +4,7 @@ class ListsController < ApplicationController
   before_action :confirm_user, only: %i[edit]
 
   def new
-    @list = current_user.lists.build
+    @list = current_user.lists.build(sublist_max_level: 0)
     @list.sublists.build
   end
 
@@ -28,13 +28,13 @@ class ListsController < ApplicationController
   end
 
   def edit
-    @list.sublists.build
+    @list
   end
 
   private
 
   def check_privacy
-    redirect_to lists_path if (@list.is_private && @list.user_id != current_user.id) || @list.parent_list_id
+    redirect_to lists_path if @list.is_private && @list.user_id != current_user.id
   end
 
   def confirm_user
@@ -59,7 +59,8 @@ class ListsController < ApplicationController
 
   def list_params
     sublist_levels = count_sublist_levels(params[:list])
-    params_permitted = prepare_sublists_attributes(sublist_levels)
+    params[:sublist_max_level] = sublist_levels
+    params_permitted = [:sublist_max_level] + prepare_sublists_attributes(sublist_levels)
     params.require(:list).permit(*params_permitted)
   end
 
@@ -71,5 +72,6 @@ class ListsController < ApplicationController
 
   def set_list
     @list = List.find(params[:id])
+    redirect_to lists_path if @list.parent_list_id
   end
 end

@@ -16,4 +16,10 @@ module ListsHelper
 
     render partial: 'sublist', locals: { sublist: sublist }
   end
+
+  def render_sublist_form(f, sublist_level_counter)
+    return if sublist_level_counter.zero?
+
+    render partial: 'sublist_form', locals: { f: f, counter: sublist_level_counter }
+  end
 end

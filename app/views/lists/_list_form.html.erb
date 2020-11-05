@@ -1,0 +1,23 @@
+  <div class='field'>
+    <%= f.label :description, 'Title' %>
+    <%= f.text_field :description %>
+  </div>
+
+  <div class='field'>
+    <%= f.label :is_private, 'Is this list private?' %>
+    <%= f.radio_button :is_private, 1, checked: true %>
+    <%= f.label :is_private, 'Yes', value: '1' %>
+    <%= f.radio_button :is_private, 0 %>
+    <%= f.label :is_private, 'No', value: '0' %> <br> <br>
+  </div>
+
+  <div class='tasks'>
+    <h3>Tasks</h3>
+    <%= render_sublist_form(f, @list.sublist_max_level) %>
+  </div>
+
+  <div class='actions'>
+    <%= f.submit 'Submit' %>
+  </div>
+
+  <%= javascript_pack_tag 'new_list' %>

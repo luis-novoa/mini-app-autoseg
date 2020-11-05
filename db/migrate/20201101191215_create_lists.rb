@@ -3,6 +3,7 @@ class CreateLists < ActiveRecord::Migration[6.0]
     create_table :lists do |t|
       t.string :description, null: false
       t.boolean :is_private, default: false
+      t.integer :sublist_max_level
       t.string :previous_lists_ids, default: ''
 
       t.references :parent_list, foreign_key: { to_table: :lists }
