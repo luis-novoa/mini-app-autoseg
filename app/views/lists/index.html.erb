@@ -1,7 +1,7 @@
 <h2>My Lists</h2>
 
 <% @lists.each do |list| %>
-  <span class='flex'><%= link_to list.description, list_path(list) %></span>
-  <span class='flex'>Owned by: <%= list.user.email %></span>
+  <span class='block'><%= link_to list.description, list_path(list) %></span>
+  <span class='block'>Owned by: <%= list.user.email %></span>
   <br>
 <% end %>

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'lists/new.html.erb', type: :feature do
+RSpec.describe 'Personal lists/index.html.erb', type: :feature do
   subject { page }
   let(:sublist) { create(:sublist) }
   let(:personal_list) { sublist.parent_list }

@@ -20,7 +20,8 @@ class ListsController < ApplicationController
   end
 
   def index
-    @lists = current_user.lists.order(:description)
+    @lists = fetch_lists(params[:scope])
+    @lists
   end
 
   private
@@ -38,6 +39,13 @@ class ListsController < ApplicationController
       output << count_sublist_levels(sublist_element[1]) + 1
     end
     output.max
+  end
+
+  def fetch_lists(param)
+    return current_user.lists.order(:description) unless param
+
+    list = List.includes(:user).where(is_private: false).order(:description)
+    list.where.not(user_id: nil)
   end
 
   def list_params
