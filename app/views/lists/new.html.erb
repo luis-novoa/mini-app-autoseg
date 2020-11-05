@@ -1,0 +1,7 @@
+<%= form_with model: @list, html: { class: 'list-form' } do |f| %>
+  <h2>Create a List</h2>
+
+  <%= display_errors %>
+
+  <%= render partial: 'list_form', locals: { f: f } %>
+<% end %>

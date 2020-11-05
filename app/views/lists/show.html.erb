@@ -1,0 +1,9 @@
+<h2><%= @list.description %></h2>
+
+<div class='user-actions'>
+  <%= user_links(@list) %>
+</div>
+
+<%= render_sublist(@list.sublists) %>
+
+<%= javascript_pack_tag 'list_show_page' %>
