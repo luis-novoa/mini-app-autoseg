@@ -1,0 +1,50 @@
+* {
+  box-sizing: border-box;
+}
+
+body{
+  display: flex;
+  justify-content: center;
+}
+
+nav {
+  border: 1px black solid;
+  border-right: none;
+
+  li {
+    list-style: none;
+  }
+
+  li:not(:last-of-type) {
+    border-bottom: 1px black solid;
+    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+
+  ul {
+    margin: 0;
+    padding: 0.5rem 1rem;
+  }
+}
+
+section {
+  border: 1px black solid;
+  min-width: 40rem;
+  padding: 0.5rem 1rem;
+
+  h2, h3 {
+    margin-top: 0;
+  }
+
+  ol {
+    padding-left: 1rem;
+  }
+}
+
+.block {
+  display: block;
+}
+
+.flex {
+  display: flex;
+}

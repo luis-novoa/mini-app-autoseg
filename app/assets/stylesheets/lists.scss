@@ -1,0 +1,28 @@
+// Place all the styles related to the Lists controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+.add-task {
+  margin-top: 0.5rem;
+}
+
+.list-form {
+  .field:not(:last-of-type), li:not(:last-of-type) {
+    margin-bottom: 0.5rem;
+  }
+}
+
+.user-actions {
+  display: inline-block;
+  span:last-of-type {
+    margin-left: 0.25rem;
+  }
+}
+
+.task {
+  margin-top: 0.5rem;
+
+  button, input {
+    margin-left: 0.2rem;
+  }
+}
