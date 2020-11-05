@@ -1,0 +1,18 @@
+<%= form_with model: @list, html: { class: 'list-form' } do |f| %>
+  <h2>Edit List</h2>
+
+  <%= display_errors %>
+
+  <div class='field'>
+    <%= f.label :description, 'Title' %>
+    <%= f.text_field :description %>
+  </div>
+
+  <div class='field'>
+    <%= f.label :is_private, 'Is this list private?' %>
+    <%= f.radio_button :is_private, 1, checked: true %>
+    <%= f.label :is_private, 'Yes', value: '1' %>
+    <%= f.radio_button :is_private, 0 %>
+    <%= f.label :is_private, 'No', value: '0' %> <br> <br>
+  </div>
+<% end %>

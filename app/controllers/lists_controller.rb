@@ -27,12 +27,14 @@ class ListsController < ApplicationController
     @lists
   end
 
-  def edit; end
+  def edit
+    @list.sublists.build
+  end
 
   private
 
   def check_privacy
-    redirect_to lists_path if @list.is_private && @list.user_id != current_user.id
+    redirect_to lists_path if (@list.is_private && @list.user_id != current_user.id) || @list.parent_list_id
   end
 
   def confirm_user
@@ -50,10 +52,9 @@ class ListsController < ApplicationController
   end
 
   def fetch_lists(param)
-    return current_user.lists.order(:description) unless param
+    return current_user.lists.where(parent_list_id: nil).order(:description) unless param
 
-    list = List.includes(:user).where(is_private: false).order(:description)
-    list.where.not(user_id: nil)
+    List.includes(:user).where(is_private: false, parent_list_id: nil).order(:description)
   end
 
   def list_params
@@ -70,6 +71,5 @@ class ListsController < ApplicationController
 
   def set_list
     @list = List.find(params[:id])
-    redirect_to lists_path if @list.parent_list_id
   end
 end

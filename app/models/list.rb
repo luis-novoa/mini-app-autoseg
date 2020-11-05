@@ -8,7 +8,9 @@ class List < ApplicationRecord
   belongs_to :parent_list, class_name: 'List', optional: true
   belongs_to :user, optional: true
 
-  accepts_nested_attributes_for :sublists
+  accepts_nested_attributes_for :sublists,
+                                allow_destroy: true,
+                                reject_if: ->(attributes) { attributes['description'].blank? }
 
   private
 
@@ -32,5 +34,6 @@ class List < ApplicationRecord
     return unless parent_list_id
 
     self.previous_lists_ids = parent_list.previous_lists_ids + "#{parent_list_id}_"
+    self.user_id = parent_list.user_id
   end
 end

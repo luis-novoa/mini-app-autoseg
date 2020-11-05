@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe 'Personal lists/index.html.erb', type: :feature do
   subject { page }
-  let(:sublist) { create(:sublist) }
-  let(:personal_list) { sublist.parent_list }
+  let!(:sublist) { create(:sublist) }
+  let!(:personal_list) { sublist.parent_list }
   let(:user) { personal_list.user }
   let!(:personal_list2) { create(:list, user: user) }
   let!(:other_list) { create(:list) }

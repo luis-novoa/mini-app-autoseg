@@ -2,6 +2,7 @@
   <% sublist.each do |item| %>
       <li class='task'>
         <span><%= item.description %></span>
+        <div class='user-actions'><%= user_links(item) %></div>
         <%= render_sublist(item.sublists) %>
       </li>
   <% end %>
