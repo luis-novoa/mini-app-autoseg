@@ -1,5 +1,8 @@
 class ListsController < ApplicationController
-  before_action :check_permition, only: %i[show]
+  before_action :set_list, only: %i[show edit]
+  before_action :check_privacy, only: %i[show]
+  before_action :confirm_user, only: %i[edit]
+
   def new
     @list = current_user.lists.build
     @list.sublists.build
@@ -24,11 +27,16 @@ class ListsController < ApplicationController
     @lists
   end
 
+  def edit; end
+
   private
 
-  def check_permition
-    @list = List.find(params[:id])
-    return redirect_to lists_path if @list.parent_list_id || (@list.is_private && @list.user_id != current_user.id)
+  def check_privacy
+    redirect_to lists_path if @list.is_private && @list.user_id != current_user.id
+  end
+
+  def confirm_user
+    redirect_to lists_path unless @list.user_id == current_user.id
   end
 
   def count_sublist_levels(list_params)
@@ -58,5 +66,10 @@ class ListsController < ApplicationController
     return %i[description is_private] if sublist_levels.zero?
 
     [:description, :is_private, sublists_attributes: prepare_sublists_attributes(sublist_levels - 1)]
+  end
+
+  def set_list
+    @list = List.find(params[:id])
+    redirect_to lists_path if @list.parent_list_id
   end
 end

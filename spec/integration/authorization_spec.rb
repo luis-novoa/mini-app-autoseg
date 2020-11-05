@@ -86,6 +86,26 @@ RSpec.describe 'Authorization', type: :feature do
       end
     end
 
+    context 'list edit page' do
+      let(:other_user_list) { create(:list) }
+      let(:sublist) { create(:sublist, parent_list: list) }
+
+      it 'can access own list' do
+        visit edit_list_path(list)
+        is_expected.to have_current_path(edit_list_path(list))
+      end
+
+      it "can't access other peoples's list" do
+        visit edit_list_path(other_user_list)
+        is_expected.to have_current_path(lists_path)
+      end
+
+      it "can't access sublist" do
+        visit edit_list_path(sublist)
+        is_expected.to have_current_path(lists_path)
+      end
+    end
+
     it 'can access favorites index page' do
       visit favorites_path
       is_expected.to have_current_path(favorites_path)
