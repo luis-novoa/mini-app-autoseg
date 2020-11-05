@@ -1,3 +1,5 @@
 <h2><%= @list.description %></h2>
 
 <%= render_sublist(@list.sublists) %>
+
+<%= javascript_pack_tag 'list_show_page' %>
