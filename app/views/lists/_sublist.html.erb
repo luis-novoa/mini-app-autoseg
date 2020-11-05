@@ -2,6 +2,7 @@
   <% sublist.each do |item| %>
       <li class='task'>
         <span><%= item.description %></span>
+        <%= link_to 'Delete', list_path(item, current_id: params[:id]), method: :delete %>
         <%= render_sublist(item.sublists) %>
       </li>
   <% end %>

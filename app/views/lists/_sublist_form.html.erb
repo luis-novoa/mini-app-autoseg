@@ -1,6 +1,7 @@
 <ol>
   <%= f.fields_for :sublists do |sublists_form| %>
     <li class='task'>
+      <%= sublists_form.hidden_field :id %>
       <%= sublists_form.label :description %>
       <%= sublists_form.text_field :description %>
       <button class='add-subtask'>Add Subtask</button>

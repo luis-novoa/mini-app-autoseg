@@ -1,0 +1,8 @@
+<h2>My Favorites</h2>
+
+<% @favorites.each do |favorite| %>
+  <span class='block'><%= link_to favorite.list.description, list_path(favorite.list) %></span>
+  <span class='block'>Owned by: <%= favorite.list.user.email %></span>
+  <span class='block'><%= link_to 'Remove from Favorites', favorite_path(favorite), method: :delete %></span>
+  <br>
+<% end %>

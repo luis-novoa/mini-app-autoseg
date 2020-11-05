@@ -1,8 +1,12 @@
 module ListsHelper
   def user_links(list)
-    return unless list.user == current_user
+    unless list.user == current_user
+      return tag.span(link_to('Add as Favorite', favorites_path(id: list.id), method: :post))
+    end
 
-    tag.span(link_to('Edit', edit_list_path(list))) + tag.span(link_to('Delete', list_path(list), method: :delete))
+    links = tag.span(link_to('Edit', edit_list_path(list)))
+    links += tag.span(link_to('Delete', list_path(list), method: :delete))
+    links
   end
 
   def display_errors

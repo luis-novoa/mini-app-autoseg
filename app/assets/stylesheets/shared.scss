@@ -9,6 +9,7 @@ body{
 
 nav {
   border: 1px black solid;
+  border-right: none;
 
   li {
     list-style: none;
@@ -28,7 +29,6 @@ nav {
 
 section {
   border: 1px black solid;
-  border-left: none;
   min-width: 40rem;
   padding: 0.5rem 1rem;
 
